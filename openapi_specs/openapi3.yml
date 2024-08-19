@@ -600,3 +600,66 @@ paths:
                   message:
                     type: string
                     example: 'Book not found!'
+
+  /ssrf_test:
+    post:
+      summary: Authenticated SSRF Test
+      description: Endpoint that fetches content from a provided URL. Requires authentication.
+      operationId: api_views.ssrf_test.ssrf_test
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: URL to be fetched
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  example: 'http://example.com'
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: 'success'
+                  content:
+                    type: string
+                    example: 'The content of the response from the requested URL.'
+                  status_code:
+                    type: integer
+                    example: 200
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: 'fail'
+                  message:
+                    type: string
+                    example: 'URL parameter is required.'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: 'fail'
+                  message:
+                    type: string
+                    example: 'Error message from the server.'
+

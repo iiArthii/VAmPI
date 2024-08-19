@@ -33,3 +33,15 @@ add_book_schema = {
     },
     "required": ["book_title", "secret"]
 }
+
+ssrf_test_schema = {
+    "type": "object",
+    "properties": {
+        "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL to be fetched for SSRF testing"
+        }
+    },
+    "required": ["url"],
+}
